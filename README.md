@@ -4,6 +4,8 @@ Runs an IRB-esque prompt (but it's NOT really IRB!) over multiple Rubies using R
 
 ![Screencast](http://s3.cooperpress.com.s3.amazonaws.com/multirb.gif)
 
+Note: This is NOT the same as [multiruby](http://www.infoq.com/news/2008/02/multiruby-testing) although multiruby has similar uses for fuller scripts and may be worth checking out.
+
 ## Why is this useful?
 
 If you're a regular developer, it's probably not very useful. But if you're researching or training people in the differences between versions and implementations of Ruby, it could be very helpful indeed.
