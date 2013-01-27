@@ -16,6 +16,8 @@ Install with:
 
     $ gem install multirb
 
+You also need a complete, working [RVM](https://rvm.io/) installation. Feel free to submit pull requests to make this auto detect other Ruby version managers, such as rbenv.
+
 ## Usage
 
 Run with:
