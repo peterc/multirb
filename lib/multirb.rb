@@ -21,14 +21,15 @@ module Multirb
     lines
   end
 
-  def determine_versions(lines)
+  def determine_versions(lines, defaults = DEFAULT_VERSIONS)
+    defaults = DEFAULT_VERSIONS if defaults.empty?
     case lines.last
     when /\#\s?all$/
       ALL_VERSIONS
     when /\#\s?(.+)$/
       [*$1.strip.split(',').map(&:strip)]
     else
-      DEFAULT_VERSIONS
+      defaults
     end
   end
 

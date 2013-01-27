@@ -20,7 +20,9 @@ loop do
   lines = read_lines
   filename = create_and_save_code(lines)
 
-  determine_versions(lines).each do |version|
+  versions = determine_versions(lines, ARGV)
+
+  versions.each do |version|
     run_code(filename, version)
   end
 

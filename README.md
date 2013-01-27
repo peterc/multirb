@@ -13,14 +13,15 @@ Install with:
 
     $ gem install multirb
 
+## Usage
+
 Run with:
 
     $ multirb
 
-## Usage
+Or if you want to specify some different 'default' versions of Ruby to run:
 
-Unless you're in the mood to experiment, run the `multirb` executable to
-bring up a Ruby prompt.
+    $ multirb 1.9.2 1.9.3 [etc..]
 
 Then:
 
