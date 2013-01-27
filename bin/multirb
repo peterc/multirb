@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+ 
+# multirb - Runs an IRB-esque prompt (but it's NOT really IRB!) over multiple
+#           versions of Ruby at once (using RVM)
+#        
+#           By Peter Cooper, BSD licensed
+#
+#           1. Type in expressions and press enter.
+#           2. Leave whitespace on the end of lines to enter more lines.
+#           3. Add # all to run all versions, nothing for default
+#           4. Add # version,version,version to run specific versions.
+#           5. exit on its own to exit (or Ctrl+D)
+ 
+require_relative '../lib/multirb'  # not strictly necessary, but laziness in development ;-)
+
+include Multirb
+ 
+loop do
+  lines = read_lines
+  filename = create_and_save_code(lines)
+
+  determine_versions(lines).each do |version|
+    run_code(filename, version)
+  end
+
+  puts
+end
