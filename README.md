@@ -4,6 +4,10 @@ Runs an IRB-esque prompt (but it's NOT really IRB!) over multiple Rubies using R
 
 ![Screencast](http://s3.cooperpress.com.s3.amazonaws.com/multirb.gif)
 
+## Why is this useful?
+
+If you're a regular developer, it's probably not very useful. But if you're researching or training people in the differences between versions and implementations of Ruby, it could be very helpful indeed.
+
 This system was used in a different form in the [Ruby 1.9 Walkthrough](https://cooperpress.com/19walkthrough) and is now being used to develop the Ruby 2.0 Walkthrough. Multirb allows me to quickly demonstrate the ways in which different versions of Ruby handle or support various features.
 
 ## Installation
