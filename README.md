@@ -42,7 +42,11 @@ Currently specifies jruby, 1.8.7, 1.9.2, 1.9.3, and 2.0.0 as 'all versions'; 1.8
 
 ## Versions
 
-0.0.1: Initial version
+0.0.2 (edge, not yet released as gem):
+ * Uses threads to speed up results (thanks to Ismael Abreu for initial implementation)
+ 
+0.0.1
+ * Initial version
 
 ## Contributing
 
