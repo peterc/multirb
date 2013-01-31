@@ -59,8 +59,7 @@ module Multirb
     f.path
   end
 
-  def run_code(filename, version, out = STDOUT)
-    out.puts "  #{version} => #{`rvm #{version} exec ruby #{filename}`}"
+  def run_code(filename, version)
+    `rvm #{version} exec ruby #{filename}`
   end
-
 end

@@ -25,10 +25,13 @@ loop do
   threads = []
   versions.each do |version|
     threads << Thread.new do
-      run_code(filename, version)
+      Thread.current[:output] = run_code(filename, version)
     end
   end
-  threads.each(&:join)
+
+  threads.zip(versions).each do |thread, version|
+    puts "  #{version} => #{thread.join[:output]}"
+  end
 
   puts
 end
