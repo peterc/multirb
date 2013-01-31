@@ -60,7 +60,32 @@ module Multirb
     f
   end
 
-  def run_code(filename, version)
-    `rvm #{version} exec ruby #{filename}`
+  def run_code(filename, version, out = STDOUT)
+    if ENV['PATH']['.rvm']
+      `rvm #{version} exec ruby #{filename}`
+    elsif ENV['PATH']['.rbenv']
+      begin
+        `#{rbenv_ruby_path_for(version)} '#{filename}'`
+      rescue ArgumentError => e # Rescue when version is not installed and print a message
+        e.message
+      end
+    else
+      raise "Seems you don't have either RVM or RBENV installed"
+    end
+  end
+
+  private
+
+  def rbenv_ruby_path_for(wanted_version)
+    @rbenv_versions ||= begin
+      versions = `rbenv versions`
+      versions.split("\n").map { |version| version.delete('*').strip.split.first }
+    end
+    rbenv_version = @rbenv_versions.select {|version| version[wanted_version] }.first
+
+    # raise error if there is not such version installed
+    raise ArgumentError.new("#{wanted_version} version not installed") if rbenv_version.nil?
+
+    "~/.rbenv/versions/#{rbenv_version}/bin/ruby"
   end
 end
