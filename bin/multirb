@@ -22,9 +22,13 @@ loop do
 
   versions = determine_versions(lines, ARGV)
 
+  threads = []
   versions.each do |version|
-    run_code(filename, version)
+    threads << Thread.new do
+      run_code(filename, version)
+    end
   end
+  threads.each(&:join)
 
   puts
 end
