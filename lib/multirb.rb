@@ -13,6 +13,7 @@ module Multirb
     begin
       print "\e[0m"
       line = Readline::readline("> ")
+      return nil if line.nil?
       Readline::HISTORY << line
       line.chomp!
       lines << line

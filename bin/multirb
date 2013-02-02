@@ -10,6 +10,12 @@ include Multirb
  
 loop do
   lines = read_lines
+  
+  unless lines
+    puts
+    exit
+  end
+
   file = create_and_save_code(lines)
 
   versions = determine_versions(lines, ARGV)
