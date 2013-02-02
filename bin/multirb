@@ -10,20 +10,22 @@ include Multirb
  
 loop do
   lines = read_lines
-  filename = create_and_save_code(lines)
+  file = create_and_save_code(lines)
 
   versions = determine_versions(lines, ARGV)
 
   threads = []
   versions.each do |version|
     threads << Thread.new do
-      Thread.current[:output] = run_code(filename, version)
+      Thread.current[:output] = run_code(file.path, version)
     end
   end
 
   threads.zip(versions).each do |thread, version|
     puts "  #{version} => #{thread.join[:output]}"
   end
+
+  file.unlink
 
   puts
 end

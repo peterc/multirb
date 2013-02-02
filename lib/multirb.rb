@@ -56,7 +56,7 @@ module Multirb
     f = Tempfile.new('multirb')
     f.puts create_code(lines)
     f.close
-    f.path
+    f
   end
 
   def run_code(filename, version)
