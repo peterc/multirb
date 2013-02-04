@@ -81,7 +81,7 @@ module Multirb
       versions = `rbenv versions`
       versions.split("\n").map { |version| version.delete('*').strip.split.first }
     end
-    rbenv_version = @rbenv_versions.select {|version| version[wanted_version] }.first
+    rbenv_version = @rbenv_versions.select {|version| version[wanted_version] }.last
 
     # raise error if there is not such version installed
     raise ArgumentError.new("#{wanted_version} version not installed") if rbenv_version.nil?
