@@ -1,6 +1,6 @@
 # multirb
 
-Runs an IRB-esque prompt (but it's NOT really IRB!) over multiple Rubies using RVM.
+Runs an IRB-esque prompt (but it's NOT really IRB!) over multiple Rubies using RVM or RBENV.
 
 ![Screencast](http://s3.cooperpress.com.s3.amazonaws.com/multirb.gif)
 
