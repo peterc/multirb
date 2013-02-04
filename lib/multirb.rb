@@ -8,6 +8,8 @@ module Multirb
   ALL_VERSIONS = %w{jruby 1.8.7 1.9.2 1.9.3 2.0.0}
   DEFAULT_VERSIONS = %w{1.8.7 1.9.3 2.0.0}
 
+  RBENV_INSTALLED_VERSIONS = `rbenv versions`.split("\n").map { |version| "_" + version.delete('*').strip.split.first } if ENV['PATH']['.rbenv']
+
   def read_lines
     lines = []
     begin
@@ -77,15 +79,11 @@ module Multirb
   private
 
   def rbenv_ruby_path_for(wanted_version)
-    @rbenv_versions ||= begin
-      versions = `rbenv versions`
-      versions.split("\n").map { |version| version.delete('*').strip.split.first }
-    end
-    rbenv_version = @rbenv_versions.select {|version| version[wanted_version] }.last
+    rbenv_version = RBENV_INSTALLED_VERSIONS.select {|version| version['_' + wanted_version] }.last
 
     # raise error if there is not such version installed
     raise ArgumentError.new("#{wanted_version} version not installed") if rbenv_version.nil?
 
-    "~/.rbenv/versions/#{rbenv_version}/bin/ruby"
+    "~/.rbenv/versions/#{rbenv_version[1..-1]}/bin/ruby"
   end
 end
