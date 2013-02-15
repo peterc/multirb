@@ -1,6 +1,6 @@
 # multirb
 
-Runs an IRB-esque prompt (but it's NOT really IRB!) over multiple Rubies using RVM.
+Runs an IRB-esque prompt (but it's NOT really IRB!) over multiple Rubies using RVM or RBENV.
 
 ![Screencast](http://s3.cooperpress.com.s3.amazonaws.com/multirb.gif)
 
@@ -18,7 +18,7 @@ Install with:
 
     $ gem install multirb
 
-You also need a complete, working [RVM](https://rvm.io/) installation. Feel free to submit pull requests to make this auto detect other Ruby version managers, such as rbenv.
+You also need a complete, working [RVM](https://rvm.io/) or [RBENV](https://github.com/sstephenson/rbenv/) installation. Feel free to submit pull requests to make this auto detect other Ruby version managers.
 
 Note: multirb works fine from MRI Ruby 1.9 and JRuby 1.7.x but has not been tested elsewhere yet.
 

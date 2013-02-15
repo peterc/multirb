@@ -5,8 +5,10 @@ require 'readline'
 require 'tempfile'
 
 module Multirb
-  ALL_VERSIONS = %w{jruby 1.8.7 1.9.2 1.9.3 2.0.0}
+  ALL_VERSIONS = %w{1.8.7 1.9.2 1.9.3 2.0.0 jruby }
   DEFAULT_VERSIONS = %w{1.8.7 1.9.3 2.0.0}
+
+  RBENV_INSTALLED_VERSIONS = `rbenv versions`.split("\n").map { |version| version.delete('*').strip.split.first } if ENV['PATH']['.rbenv']
 
   def read_lines
     lines = []
@@ -60,7 +62,42 @@ module Multirb
     f
   end
 
-  def run_code(filename, version)
+  def run_code(*args)
+    case installed_ruby_version_manager
+    when :rvm
+      run_rvm(*args)
+    when :rbenv
+      run_rbenv(*args)
+    when :none
+      raise "You don't have either RVM or RBENV installed"
+    end
+  end
+
+  private
+
+  def installed_ruby_version_manager
+    @installed_version ||= begin
+      return :rvm if ENV['PATH']['.rvm']
+      return :rbenv if ENV['PATH']['.rbenv']
+      :none
+    end
+    @installed_manager
+  end
+
+  def run_rvm(filename, version)
     `rvm #{version} exec ruby #{filename}`
+  end
+
+  def run_rbenv(filename, version)
+    `/bin/sh -c "RBENV_VERSION=#{rbenv_version(version)} ~/.rbenv/shims/ruby #{filename}"`
+  rescue ArgumentError => e # Rescue when version is not installed and print a message
+    e.message
+  end
+
+  def rbenv_version(wanted_version)
+    rbenv_version = RBENV_INSTALLED_VERSIONS.select {|version| version.match(/^#{wanted_version}/) }.last
+    # raise error if there is not such version installed
+    raise ArgumentError.new("version not installed") unless rbenv_version
+    rbenv_version
   end
 end
