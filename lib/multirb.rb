@@ -89,17 +89,15 @@ module Multirb
   end
 
   def run_rbenv(filename, version)
-    `#{rbenv_ruby_path_for(version)} '#{filename}'`
+    `/bin/sh -c "RBENV_VERSION=#{rbenv_version(version)} ~/.rbenv/shims/ruby #{filename}"`
   rescue ArgumentError => e # Rescue when version is not installed and print a message
     e.message
   end
 
-  def rbenv_ruby_path_for(wanted_version)
+  def rbenv_version(wanted_version)
     rbenv_version = RBENV_INSTALLED_VERSIONS.select {|version| version.match(/^#{wanted_version}/) }.last
-
     # raise error if there is not such version installed
-    raise ArgumentError.new("version not installed") if rbenv_version.nil?
-
-    "~/.rbenv/versions/#{rbenv_version}/bin/ruby"
+    raise ArgumentError.new("version not installed") unless rbenv_version
+    rbenv_version
   end
 end
