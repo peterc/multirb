@@ -5,8 +5,8 @@ require 'readline'
 require 'tempfile'
 
 module Multirb
-  ALL_VERSIONS = %w{jruby 1.8.7 1.9.2 1.9.3 2.0.0}
-  DEFAULT_VERSIONS = %w{1.8.7 1.9.3 2.0.0}
+  ALL_VERSIONS = %w{jruby 1.8.7 1.9.2 1.9.3 2.0.0-rc2}
+  DEFAULT_VERSIONS = %w{1.8.7 1.9.3 2.0.0-rc2}
 
   def read_lines
     lines = []

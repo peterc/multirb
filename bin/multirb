@@ -28,7 +28,7 @@ loop do
   end
 
   threads.zip(versions).each do |thread, version|
-    puts "  #{version} => #{thread.join[:output]}"
+    puts "  #{version.rjust(versions.max.length)} => #{thread.join[:output]}"
   end
 
   file.unlink

@@ -44,11 +44,14 @@ Currently specifies jruby, 1.8.7, 1.9.2, 1.9.3, and 2.0.0 as 'all versions'; 1.8
 
 ## Versions
 
-0.0.3 (forthcoming):
+0.0.4 (forthcoming):
  * rbenv support
- * acts nicely with Ctrl+D rather than raising a needless error
 
-0.0.2 (CURRENT GEM RELEASE):
+0.0.3 (CURRENT GEM RELEASE):
+ * acts nicely when using Ctrl+D to exit rather than raising a needless error
+ * uses Ruby 2.0.0-rc2 as a default
+
+0.0.2:
  * Uses threads to speed up results (thanks to Ismael Abreu for initial implementation)
  * Improved 'tempfile' usage to prevent errors on JRuby
  
