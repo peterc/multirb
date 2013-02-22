@@ -44,7 +44,7 @@ Currently specifies jruby, 1.8.7, 1.9.2, 1.9.3, and 2.0.0 as 'all versions'; 1.8
 
 ## Versions
 
-0.0.4 (forthcoming):
+0.0.4 (current edge version):
  * rbenv support
 
 0.0.3 (CURRENT GEM RELEASE):
