@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Multirb::VERSION
   gem.authors       = ["Peter Cooper"]
   gem.email         = ["git@peterc.org"]
-  gem.description   = %{Run Ruby code over multiple implementations/versions using RVM from a IRB-esque prompt}
-  gem.summary       = %{Run Ruby code over multiple implementations/versions using RVM from a IRB-esque prompt}
+  gem.description   = %{Run Ruby code over multiple implementations/versions using RVM or RBENV from a IRB-esque prompt}
+  gem.summary       = %{Run Ruby code over multiple implementations/versions using RVM or RBENV from a IRB-esque prompt}
   gem.homepage      = "https://github.com/peterc/multirb"
 
   gem.files         = `git ls-files`.split($/)
