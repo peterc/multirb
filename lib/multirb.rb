@@ -5,8 +5,8 @@ require 'readline'
 require 'tempfile'
 
 module Multirb
-  ALL_VERSIONS = %w{1.8.7 1.9.2 1.9.3 2.0.0-rc2 jruby}
-  DEFAULT_VERSIONS = %w{1.8.7 1.9.3 2.0.0-rc2}
+  ALL_VERSIONS = %w{1.8.7 1.9.2 1.9.3 2.0.0 jruby}
+  DEFAULT_VERSIONS = %w{1.8.7 1.9.3 2.0.0}
 
   RBENV_INSTALLED_VERSIONS = `rbenv versions`.split("\n").map { |version| version.delete('*').strip.split.first } if ENV['PATH']['.rbenv']
 
