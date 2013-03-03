@@ -25,5 +25,6 @@ describe Multirb do
     determine_versions(['2 + 2 #all', '5 + 5'], %w{1.9.2}).must_equal %w{1.9.2}
     determine_versions(['2 + 2 # 1.9.2,1.9.3,2.0.0']).must_equal %w{1.9.2 1.9.3 2.0.0}
     determine_versions(['2 + 2 # 1.9.2, 1.9.3, 2.0.0']).must_equal %w{1.9.2 1.9.3 2.0.0}
+    determine_versions(['2 + 2 "#{1.9}" blah blah']).must_equal DEFAULT_VERSIONS
   end
 end

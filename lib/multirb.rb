@@ -29,7 +29,7 @@ module Multirb
     case lines.last
     when /\#\s?all$/
       ALL_VERSIONS
-    when /\#\s?(.+)$/
+    when /\#\s?([^"']+)$/
       [*$1.strip.split(',').map(&:strip)]
     else
       defaults
