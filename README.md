@@ -44,10 +44,13 @@ Currently specifies jruby, 1.8.7, 1.9.2, 1.9.3, and 2.0.0 as 'all versions'; 1.8
 
 ## Versions
 
-0.0.4 (current edge version):
+0.0.5 (current gem release):
+ * fixes a Ruby version detection bug triggered by interpolation (found by dalton)
+
+0.0.4:
  * rbenv support
 
-0.0.3 (CURRENT GEM RELEASE):
+0.0.3:
  * acts nicely when using Ctrl+D to exit rather than raising a needless error
  * uses Ruby 2.0.0-rc2 as a default
 
