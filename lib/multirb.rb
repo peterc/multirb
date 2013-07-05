@@ -86,6 +86,8 @@ module Multirb
 
   def run_rvm(filename, version)
     `rvm #{version} exec ruby #{filename}`
+    `tput setb 1`
+    `tput bold`
   end
 
   def run_rbenv(filename, version)
