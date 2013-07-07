@@ -21,7 +21,16 @@ loop do
   versions = determine_versions(lines, ARGV)
 
   threads = []
-  versions.each do |version|
+  versions.each_with_index do |version, i|
+    file =
+        case version
+          when "1.9.3"
+            create_and_save_code(lines, "#33m")
+          when "2.0.0"
+            create_and_save_code(lines, "#32m")
+          else
+            create_and_save_code(lines, "#{34 + i}m")
+        end
     threads << Thread.new do
       Thread.current[:output] = run_code(file.path, version)
     end

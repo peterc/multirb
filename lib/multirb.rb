@@ -36,7 +36,7 @@ module Multirb
     end
   end
 
-  def create_code(lines)
+  def create_code(lines, color)
     %{# encoding: utf-8
       ARRAY = ['a', 'b', 'c']
       HASH = { :name => "Jenny", :age => 40, :gender => :female, :hobbies => %w{chess cycling baking} }
@@ -45,7 +45,7 @@ module Multirb
       STRING2 = "çé"
       STRING3 = "ウabcé"
       o = begin
-        "\e[32m" + eval(<<-'CODEHERE'
+        "\e[#{color}" + eval(<<-'CODEHERE'
           #{lines.join("\n")}
         CODEHERE
         ).inspect + "\e[0m"
@@ -55,9 +55,9 @@ module Multirb
       print o}
   end
 
-  def create_and_save_code(lines)
+  def create_and_save_code(lines, color="32m")
     f = Tempfile.new('multirb')
-    f.puts create_code(lines)
+    f.puts create_code(lines, color)
     f.close
     f
   end
@@ -85,9 +85,10 @@ module Multirb
   end
 
   def run_rvm(filename, version)
-    `rvm #{version} exec ruby #{filename}`
-    `tput setb 1`
-    `tput bold`
+    cmd = `tput bold`
+    cmd += `tput setf 3` if version.include?('1.9.3')
+    cmd += `rvm #{version} exec ruby #{filename}`
+    cmd
   end
 
   def run_rbenv(filename, version)
