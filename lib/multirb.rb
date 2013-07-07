@@ -91,7 +91,9 @@ module Multirb
   end
 
   def run_rbenv(filename, version)
-    `/bin/sh -c "RBENV_VERSION=#{rbenv_version(version)} ~/.rbenv/shims/ruby #{filename}"`
+    cmd = `tput bold`
+    cmd += `/bin/sh -c "RBENV_VERSION=#{rbenv_version(version)} ~/.rbenv/shims/ruby #{filename}"`
+    cmd
   rescue ArgumentError => e # Rescue when version is not installed and print a message
     e.message
   end
