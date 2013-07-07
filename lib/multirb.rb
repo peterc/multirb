@@ -86,7 +86,6 @@ module Multirb
 
   def run_rvm(filename, version)
     cmd = `tput bold`
-    cmd += `tput setf 3` if version.include?('1.9.3')
     cmd += `rvm #{version} exec ruby #{filename}`
     cmd
   end
