@@ -2,7 +2,6 @@
 
 require_relative 'multirb/version'    # not strictly necessary, but laziness in development ;-)
 require 'readline'
-require 'tempfile'
 
 module Multirb
   ALL_VERSIONS = %w{1.8.7 1.9.2 1.9.3 2.0.0 jruby}
@@ -34,32 +33,6 @@ module Multirb
     else
       defaults
     end
-  end
-
-  def create_code(lines, color)
-    %{# encoding: utf-8
-      ARRAY = ['a', 'b', 'c']
-      HASH = { :name => "Jenny", :age => 40, :gender => :female, :hobbies => %w{chess cycling baking} }
-      ARRAY2 = [1,2,3]
-      STRING = "Hello"
-      STRING2 = "çé"
-      STRING3 = "ウabcé"
-      o = begin
-        "\e[#{color}" + eval(<<-'CODEHERE'
-          #{lines.join("\n")}
-        CODEHERE
-        ).inspect + "\e[0m"
-      rescue Exception => e
-        "\e[31m!! \#{e.class}: \#{e.message}\e[0m"
-      end
-      print o}
-  end
-
-  def create_and_save_code(lines, color="32m")
-    f = Tempfile.new('multirb')
-    f.puts create_code(lines, color)
-    f.close
-    f
   end
 
   def run_code(*args)
