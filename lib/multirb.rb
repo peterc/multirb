@@ -2,7 +2,6 @@
 
 require_relative 'multirb/version'    # not strictly necessary, but laziness in development ;-)
 require 'readline'
-require 'tempfile'
 
 module Multirb
   ALL_VERSIONS = %w{1.8.7 1.9.2 1.9.3 2.0.0 jruby}
@@ -36,32 +35,6 @@ module Multirb
     end
   end
 
-  def create_code(lines)
-    %{# encoding: utf-8
-      ARRAY = ['a', 'b', 'c']
-      HASH = { :name => "Jenny", :age => 40, :gender => :female, :hobbies => %w{chess cycling baking} }
-      ARRAY2 = [1,2,3]
-      STRING = "Hello"
-      STRING2 = "çé"
-      STRING3 = "ウabcé"
-      o = begin
-        "\e[32m" + eval(<<-'CODEHERE'
-          #{lines.join("\n")}
-        CODEHERE
-        ).inspect + "\e[0m"
-      rescue Exception => e
-        "\e[31m!! \#{e.class}: \#{e.message}\e[0m"
-      end
-      print o}
-  end
-
-  def create_and_save_code(lines)
-    f = Tempfile.new('multirb')
-    f.puts create_code(lines)
-    f.close
-    f
-  end
-
   def run_code(*args)
     case installed_ruby_version_manager
     when :rvm
@@ -85,11 +58,15 @@ module Multirb
   end
 
   def run_rvm(filename, version)
-    `rvm #{version} exec ruby #{filename}`
+    cmd = `tput bold`
+    cmd += `rvm #{version} exec ruby #{filename}`
+    cmd
   end
 
   def run_rbenv(filename, version)
-    `/bin/sh -c "RBENV_VERSION=#{rbenv_version(version)} ~/.rbenv/shims/ruby #{filename}"`
+    cmd = `tput bold`
+    cmd += `/bin/sh -c "RBENV_VERSION=#{rbenv_version(version)} ~/.rbenv/shims/ruby #{filename}"`
+    cmd
   rescue ArgumentError => e # Rescue when version is not installed and print a message
     e.message
   end

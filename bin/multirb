@@ -5,6 +5,7 @@
 #           versions of Ruby at once (using RVM)
  
 require_relative '../lib/multirb'  # not strictly necessary, but laziness in development ;-)
+require 'tempfile'
 
 include Multirb
  
@@ -16,12 +17,44 @@ loop do
     exit
   end
 
-  file = create_and_save_code(lines)
+  file = ""
+
+  create_code =
+      if `tput colors`
+        %{# encoding: utf-8
+          ARRAY = ['a', 'b', 'c']
+          HASH = { :name => "Jenny", :age => 40, :gender => :female, :hobbies => %w{chess cycling baking} }
+          ARRAY2 = [1,2,3]
+          STRING = "Hello"
+          STRING2 = "çé"
+          STRING3 = "ウabcé"
+          o = begin
+            "\e[#32m" + eval(<<-'CODEHERE'
+              #{lines.join("\n")}
+            CODEHERE
+            ).inspect + "\e[0m"
+          rescue Exception => e
+            "\e[31m!! \#{e.class}: \#{e.message}\e[0m"
+          end
+          print o}
+      end
 
   versions = determine_versions(lines, ARGV)
 
   threads = []
-  versions.each do |version|
+  versions.each_with_index do |version, i|
+    file =
+        f = Tempfile.new('multirb')
+        case version
+          when "1.9.3"
+            f.puts create_code.gsub("#32m", "#33m")
+          when "2.0.0"
+            f.puts create_code.gsub("#32m", "#32m")
+          else
+            f.puts create_code.gsub("#32m", "##{34 + i}m")
+        end
+        f.close
+        f
     threads << Thread.new do
       Thread.current[:output] = run_code(file.path, version)
     end
