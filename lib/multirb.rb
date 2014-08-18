@@ -4,8 +4,8 @@ require_relative 'multirb/version'    # not strictly necessary, but laziness in 
 require 'readline'
 
 module Multirb
-  ALL_VERSIONS = %w{1.8.7 1.9.2 1.9.3 2.0.0 jruby}
-  DEFAULT_VERSIONS = %w{1.8.7 1.9.3 2.0.0}
+  ALL_VERSIONS = %w{1.8.7 1.9.2 1.9.3 2.0.0 2.1.2 jruby}
+  DEFAULT_VERSIONS = %w{1.8.7 1.9.3 2.0.0 2.1.2}
 
   RBENV_INSTALLED_VERSIONS = `rbenv versions`.split("\n").map { |version| version.delete('*').strip.split.first } if ENV['PATH']['.rbenv']
 
