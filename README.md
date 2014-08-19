@@ -40,11 +40,14 @@ Then:
 4. Add `# version,version,version` to run specific versions (e.g. `# 1.9.2, 1.9.3`.)
 5. Type `exit` on its own to exit (or use Ctrl+D.)
 
-Currently specifies jruby, 1.8.7, 1.9.2, 1.9.3, and 2.0.0 as 'all versions'; 1.8.7, 1.9.3, and 2.0.0 as 'default versions'.
+Currently specifies jruby, 1.8.7, 1.9.2, 1.9.3, 2.0.0, and 2.1.2 as 'all versions'; 1.8.7, 1.9.3, 2.0.0, and 2.1.2 as 'default versions'.
 
 ## Versions
 
-0.0.5 (current gem release):
+0.0.6 (current gem release)
+ * add ruby 2.1.2 to all and default
+
+0.0.5
  * fixes a Ruby version detection bug triggered by interpolation (found by dalton)
 
 0.0.4:
@@ -57,7 +60,7 @@ Currently specifies jruby, 1.8.7, 1.9.2, 1.9.3, and 2.0.0 as 'all versions'; 1.8
 0.0.2:
  * Uses threads to speed up results (thanks to Ismael Abreu for initial implementation)
  * Improved 'tempfile' usage to prevent errors on JRuby
- 
+
 0.0.1
  * Initial version
 
